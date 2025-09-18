@@ -1,0 +1,73 @@
+#The @property decorator is a built-in feature in Python.
+#It's a decorator used to define a method as a property, allowing it to be accessed like a regular attribute.
+#The main benefit is that you can add additional logic when reading, writing, or deleting an attribute.
+#It essentially gives you getter, setter, and deleter methods for a property.
+
+class Rectangle:
+    def __init__(self, width, height):
+        self._width = width   # private-style attributes
+        self._height = height
+
+    # This is the 'getter' method for the 'width' property.
+    # It allows you to get the value of width by simply calling 'rectangle.width'.
+    # The f-string formats the output with one decimal place and adds "cm".
+    @property
+    def width(self):
+        return f"{self._width:.1f}cm"
+
+    # This is the 'getter' for the 'height' property, working the same way as the width getter.
+    @property
+    def height(self):
+        return f"{self._height:.1f}cm"
+
+    # This is the 'setter' method for the 'width' property.
+    # It is called when you assign a new value to 'rectangle.width'.
+    # This method includes data validation to ensure the new width is greater than zero.
+    @width.setter
+    def width(self, new_width):
+        if new_width > 0:
+            self._width = new_width
+        else:
+            print("Width must be greater than zero")
+
+    # This is the 'setter' for the 'height' property, with similar validation.
+    @height.setter
+    def height(self, new_height):
+        if new_height > 0:
+            self._height = new_height
+        else:
+            print("Height must be greater than zero")
+
+    # This is the 'deleter' method for the 'width' property.
+    # It is called when 'del rectangle.width' is used.
+    # It provides a way to control what happens when an attribute is deleted.
+    @width.deleter
+    def width(self):
+        del self._width
+        print("Width has been deleted")
+
+    # This is the 'deleter' for the 'height' property.
+    @height.deleter
+    def height(self):
+        del self._height
+        print("Height has been deleted")
+
+# --- Example Usage ---
+
+# Create an instance of the Rectangle class.
+rectangle = Rectangle(3, 4)
+
+# Use the setters to modify the width and height.
+# This calls the @width.setter and @height.setter methods internally.
+rectangle.width = 5
+rectangle.height = 6
+
+# Use the getters to print the current values of width and height.
+# This calls the @width.property and @height.property methods.
+print(rectangle.width)
+print(rectangle.height)
+
+# Use the deleter to remove the width and height properties.
+# This calls the @width.deleter and @height.deleter methods.
+del rectangle.width
+del rectangle.height

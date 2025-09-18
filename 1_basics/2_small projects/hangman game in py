@@ -1,0 +1,84 @@
+#hangman game in py.
+
+import random
+word= ("apple", "orange", "banana", "sis", "feps")
+
+hangman_art={0:("   ",
+                "   ",
+                "   "),
+             1:(" o ",
+                "   ",
+                "   "),
+             2:(" o ",
+                " | ",
+                "   "),
+             3:(" o ",
+                "/| ",
+                "   "),
+             4:(" o ",
+                "/|\\",
+                "   "),
+             5:(" o ",
+                "/|\\",
+                "/  "),
+             6:(" o ",
+                "/|\\",
+                "/ \\")}
+
+def display_hangman(w_guess):
+    print("***************")
+    for line in hangman_art[w_guess]:
+        print(line)
+    print("***************")
+
+
+def display_hint(hint):
+    print(" ".join(hint))
+
+def dispaly_answer(answer):
+    print(" ".join(answer))
+
+def main():
+    answer=random.choice(word)
+    hint=len(answer)* ["_"]
+    w_guess=0
+    play_again=True
+    guessed_letters=set() # maynfa3sh t5lyha ***=()*** lazem tkon ***=set()*** to make an empty set unlike an empty list ***=[]**
+    
+    while play_again:
+        display_hangman(w_guess)
+        display_hint(hint)
+        guess= input("guess one character please: ").lower()
+
+        if len(guess) !=1 or guess.isdigit():
+            print("only one character should be used ")
+            continue
+
+        if guess in guessed_letters:
+            print("you should guess an new letter")
+            continue
+
+        guessed_letters.add(guess)
+
+        if guess in answer:
+            for i in range(len(answer)):
+                if answer[i]== guess:
+                    hint[i]= guess
+            print(f"keep the good job **{guess}** is right")
+                
+        else:
+            print(f"try again **{guess}** is wrong ")
+            w_guess+=1
+
+        if "_" not in hint:
+            print("you win babe 😘😋")
+            display_hint(hint)
+            break
+
+        if w_guess==7:
+            print("fuck you, you lost 🤭")
+            break
+
+
+if __name__=="__main__":
+    main()
