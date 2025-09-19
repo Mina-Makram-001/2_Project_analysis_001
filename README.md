@@ -215,3 +215,46 @@ The analysis highlights the most in-demand skills across different job titles in
 The first table shows specialized technical skills (e.g., Git, Keras, NumPy, Pandas, PyTorch, Linux, and MATLAB) that are associated with very high median salaries in Egypt, often exceeding $150K per year. However, most of these skills appear only once or twice in the dataset, which means they may represent niche roles or outlier postings rather than consistent market trends.
 
 The second table presents more common skills such as Python, SQL, Excel, and R, which appear more frequently in job postings. These skills have lower median salaries (around $70K–$90K) compared to the niche skills but are much more widely demanded. This suggests that while specialized technologies can command higher pay, core skills like Python and SQL remain the foundation for employability and are crucial for most data-related positions.
+
+## 4.What is the most optimal skill to learn for Data Analysts?
+
+The next Python code analyzes data on data analyst jobs in Egypt, focusing on the relationship between skills, salary, and job demand. Initially, the code loads job posting data and cleans it by converting the 'job_posted_date' to a datetime object and the 'job_skills' column from a string representation to a list. It then filters the dataset to include only Data Analyst roles in Egypt that have a specified yearly salary. The skills data is then prepared for analysis by creating an exploded DataFrame, where each row represents a single skill. The analysis calculates the median salary for each skill and the demand percentage, which represents how often a particular skill appears in the job postings. Finally, a bar plot is generated to visualize the top 15 skills, showing their median yearly salary and a text label indicating their demand percentage, offering insights into which skills are most valuable and in demand for data analysts in Egypt.
+
+View my notebook in details here:
+[5_optimal_skills.ipynb](3_project/5_optimal_skills.ipynb)
+
+### Visualize data
+
+```
+# Sort by skills_count
+df_plot = df_DA_skills.sort_values("skills_count", ascending=True).head(15)  # show top 15 for clarity
+
+plt.figure(figsize=(10,6))
+sns.barplot(
+    data=df_plot,
+    x="median_salary", 
+    y=df_plot.index, 
+    palette="mako"
+)
+
+# Format salary axis as $K
+plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+# Add percentage labels on bars
+for i, (salary, percent) in enumerate(zip(df_plot["median_salary"], df_plot["persent"])):
+    plt.text(salary + 2000, i, f"{percent:.1f}%", va="center", fontsize=9, color="black")
+
+sns.despine()
+plt.xlabel("Median Yearly Salary ($USD)")
+plt.ylabel("Skill")
+plt.title("Median Salary and Demand Percentage by Skill (Egypt)")
+plt.tight_layout()
+plt.show()
+```
+
+### Results
+![visualization](3_project/outputs/5_optimal_skills_output.png)
+
+### Insights
+
+Based on the last bar chart, it is evident that several skills are highly sought after for data analyst roles in Egypt, with a significant impact on median salaries. Python, with a median salary of approximately $65,000, has the highest demand percentage at 75%, indicating its critical importance. SQL and Flow follow with a demand of 50%, and both command a median salary of about $60,000, highlighting their strong value in the job market. SAP, while having a demand of only 25%, stands out with the highest median salary of over $70,000, suggesting it is a niche but highly compensated skill. Other skills, including Excel, Power BI, Azure, DAX, R, Tableau, and Spark, all have a 25% demand and offer a median salary of around $50,000. Overall, the data reveals a strong correlation between high demand and high median salaries for core analytical skills like Python and SQL, while also pointing to the high-value, specialized nature of skills like SAP.
