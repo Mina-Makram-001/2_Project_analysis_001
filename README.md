@@ -149,3 +149,69 @@ for i in range(3):
 * **Excel**
   Excel demonstrates **steady but lower demand** compared to SQL and Python, averaging **20–35%**. Its dip around September followed by recovery toward the year’s end shows it is still a **foundational tool**, but less central than SQL and Python for analyst roles.
 
+## 3.How well do jobs and skills pay for Data Analysts?
+
+In this project, I analyzed job market data in Egypt with a focus on data-related roles. I examined the most in-demand skills by grouping and counting their occurrences, visualized the top five skills for each job title using bar charts, and compared skill frequency with salary levels through scatter plots. I also explored job benefits, work-from-home opportunities, and job degree requirements by applying value counts and visualizations. Throughout the process, I used Python libraries such as pandas, matplotlib, and seaborn to clean, aggregate, and represent the data, which provided clear insights into hiring trends and skill demands in the Egyptian market.
+
+View my notebook in details here:
+[4_salary_analysis.ipynb](3_project/4_salary_analysis.ipynb)
+
+### Visualize data 
+
+```
+sns.boxplot(data=df_Egy_top6, x='salary_year_avg', y='job_title_short', palette='mako')
+
+plt.title('Salary Distribution in Egypt')
+plt.xlabel('Yearly Salary ($USD)')
+plt.ylabel('')
+ax = plt.gca() 
+ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+plt.show()
+```
+
+### Results
+![visualization](3_project/outputs/4_salary_analysis_output.png)
+
+### Insights 
+
+The analysis highlights the most in-demand skills across different job titles in Egypt, with Python, SQL, and Excel emerging as core requirements for data-related roles. Visualizations of the top five skills for each job title reveal clear patterns of technical specialization, while scatter plots comparing skill demand and salary provide evidence of which skills not only increase employability but also offer higher earning potential.
+
+### Skill-Based Salary Insights
+
+* 1st_table 
+
+| job\_skills   | count | median\_salary |
+| ------------- | ----- | -------------- |
+| git           | 1     | 166000.0       |
+| keras         | 1     | 166000.0       |
+| jira          | 1     | 166000.0       |
+| numpy         | 1     | 166000.0       |
+| pandas        | 1     | 166000.0       |
+| pytorch       | 1     | 166000.0       |
+| linux         | 2     | 161750.0       |
+| matlab        | 1     | 157500.0       |
+| shell         | 1     | 157500.0       |
+| elasticsearch | 1     | 157500.0       |
+---
+
+* 2nd_table 
+
+| job\_skills | count | median\_salary |
+| ----------- | ----- | -------------- |
+| python      | 14    | 90670.0        |
+| sql         | 13    | 90670.0        |
+| mongodb     | 6     | 90670.0        |
+| scala       | 6     | 96773.0        |
+| sas         | 6     | 90670.0        |
+| excel       | 5     | 79200.0        |
+| r           | 5     | 70000.0        |
+| spark       | 5     | 90670.0        |
+| aws         | 5     | 96773.0        |
+| nosql       | 4     | 93721.5        |
+
+---
+
+
+The first table shows specialized technical skills (e.g., Git, Keras, NumPy, Pandas, PyTorch, Linux, and MATLAB) that are associated with very high median salaries in Egypt, often exceeding $150K per year. However, most of these skills appear only once or twice in the dataset, which means they may represent niche roles or outlier postings rather than consistent market trends.
+
+The second table presents more common skills such as Python, SQL, Excel, and R, which appear more frequently in job postings. These skills have lower median salaries (around $70K–$90K) compared to the niche skills but are much more widely demanded. This suggests that while specialized technologies can command higher pay, core skills like Python and SQL remain the foundation for employability and are crucial for most data-related positions.
