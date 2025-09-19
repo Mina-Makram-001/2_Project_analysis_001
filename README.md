@@ -107,4 +107,45 @@ The results show that Python and SQL are the two most consistently demanded skil
 
 Overall, the Egyptian job market highlights a strong demand for core programming and database skills while differentiating between roles through specialized requirements: visualization and business tools for Analysts, big data and cloud infrastructure for Engineers, and a combination of statistical methods and large-scale processing for Scientists.
 
+## 2.How are in-demand skills trending for Data Analysts?
+
+I transformed the data by breaking job skills into separate rows, counting how often each skill appeared per month, ranking them by total demand, and converting month numbers to names. Then I calculated the percentage demand of each skill per month and visualized the top 3 skills (SQL, Python, Excel) in a line chart with markers, percentages on the y-axis, and clear labels to show their monthly trends.
+
+View my notebook in details here:
+[3_skills_trend.ipynb](3_project/3_skills_trend.ipynb)
+
+### Visualize data 
+
+```
+df_plot= df_DA_Egy_persent.iloc[:, :3]
+
+sns.lineplot(data=df_plot, dashes=False, palette='mako',marker='o', markersize=6)
+sns.despine()
+
+plt.title('Trending job skills in Egypt per month')
+plt.xlabel('2023')
+plt.ylabel('Demanded persentage skills')
+plt.legend().remove()
+
+from matplotlib.ticker import PercentFormatter
+ax= plt.gca()
+ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+for i in range(3):
+    plt.text(11.25, df_plot.iloc[-1, i], df_plot.columns[i])
+```
+
+### Results
+![visualization](3_project/outputs/3_skills_trend_output.png)
+
+### Insights
+
+* **SQL**
+  SQL is consistently the **most in-demand skill** for Data Analysts in Egypt. It peaks above **45% in April and July**, showing strong reliance on database querying skills. Despite fluctuations, SQL remains the top requirement across the year.
+
+* **Python**
+  Python demand shows more **volatility** but nearly **matches SQL in July and December**. This suggests Python is increasingly critical for analytical and automation tasks, and employers are seeking candidates with advanced programming capabilities alongside SQL.
+
+* **Excel**
+  Excel demonstrates **steady but lower demand** compared to SQL and Python, averaging **20–35%**. Its dip around September followed by recovery toward the year’s end shows it is still a **foundational tool**, but less central than SQL and Python for analyst roles.
 
