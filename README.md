@@ -24,7 +24,7 @@ Below are the questions I will answer in my project.
 
 - jupyter notebook: The notebook I used to run my codes easily.
 - VS code: My go-to for executing my python scripts
-- Git and Githup: Essintial in sharing my analysis, insuring collaboration.
+- Git and GitHub: Essintial in sharing my analysis, insuring collaboration.
 
 # Data preparation and clean up 
 
